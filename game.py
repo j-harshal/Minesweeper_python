@@ -1,3 +1,4 @@
+import mysql.connector
 import random
 
 class Minesweeper:
@@ -39,6 +40,25 @@ class Minesweeper:
             self.remaining_tiles -= 1
             return True
 
+    def store_grid_state_in_mysql(self):
+        # Connect to MySQL database
+        connection = mysql.connector.connect(
+            host="localhost",
+            user="joshi",
+            password="alala",
+            database="results"
+        )
+        cursor = connection.cursor()
+
+        # Insert grid state into MySQL table
+        for x in range(self.n):
+            for y in range(self.n):
+                cursor.execute("INSERT INTO grid_state (x, y, value) VALUES (%s, %s, %s)", (x, y, self.grid[x][y]))
+
+        # Commit changes and close connection
+        connection.commit()
+        connection.close()
+
     def play(self):
         print("Welcome to Minesweeper!")
         print("Player 1 starts.")
@@ -76,6 +96,9 @@ class Minesweeper:
                 if (x, y) in self.mines:
                     self.grid[x][y] = '0'
         self.print_grid()
+
+        # Store final grid state in MySQL
+        self.store_grid_state_in_mysql()
 
 if __name__ == "__main__":
     game = Minesweeper(n=5, m=2)
