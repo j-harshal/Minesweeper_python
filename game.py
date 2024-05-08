@@ -2,7 +2,7 @@ import mysql.connector
 import random
 
 class Minesweeper:
-    def __init__(self, n=5, m=2):
+    def __init__(self, n, m):
         self.n = n
         self.m = m
         self.grid = [['-' for _ in range(n)] for _ in range(n)]  # Initialize all tiles as unturned
