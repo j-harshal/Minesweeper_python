@@ -21,3 +21,6 @@ user_input_username = input("Username: ")
 user_input_password = input("Password: ")
 
 user.login(user_input_username, user_input_password)
+
+def sayhello():
+    print("Hello")

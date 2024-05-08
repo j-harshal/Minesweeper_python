@@ -1,3 +1,4 @@
+import auth
 class Car :
     Brand : "Audi"  #same for all improves space
 
@@ -14,7 +15,7 @@ class Car :
     
     @staticmethod
     
-    def say_go():
+    def say_go():                           #no need to pass self
         print("GO")
 
 
@@ -28,3 +29,6 @@ print(secondcar.name, secondcar.marks)
 firstcar.rev()
 print(firstcar.getmarks())
 firstcar.say_go()
+
+
+auth.sayhello()
